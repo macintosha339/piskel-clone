@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import Header from './header/header';
+import Main from './main/main';
 
 
-
-class App extends Component {
-    render() {
-        return (
-            <Header />
-        );
-    }
-}
+const App = () => (
+    <React.Fragment>
+        <Header />
+        <Main />
+    </React.Fragment>
+);
+    
 
 export default App;
