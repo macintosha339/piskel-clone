@@ -13,6 +13,7 @@ class CanvasElement extends PureComponent {
     
     draw = (e) => {
         const context = this.canvas.current.getContext('2d')
+        const currentCol = document.getElementById('currentCol')
         const { pixelSize } = this.props
         const cordX = e.offsetX === undefined ? Math.round(e.layerX / pixelSize)
         : Math.round(e.offsetX / pixelSize)
@@ -72,6 +73,14 @@ class CanvasElement extends PureComponent {
     mouseMove = (e) => {
         if(this.props.activeTool === 'pencil') this.draw(e);
     }
+
+    hexToRGB = (hex) => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+    
+        return `rgb(${r}, ${g}, ${b})`;
+      }
 
     render() {
 

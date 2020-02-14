@@ -1,23 +1,38 @@
 import React, { PureComponent } from "react";
+import Color from "./color/color";
 
+const colors = [
+    {
+        id: 'prevCol',
+        text: 'Prev Color',
+    },
+    {
+        id: 'red',
+        text: 'red',
+    },
+    {
+        id: 'blue',
+        text: 'blue',
+    },
+];
 class ColorList extends PureComponent {
     constructor(props) {
         super(props);
     }
 
     render() {
+        const {currentCol, colorSwitcher} = this.props
         return(
             <div className="color_list">
-                    <div className="item circle" id="currentCol">
-                        <input type="color" id="input_color" name="head" defaultValue="#с4с4с4"/>
+                    <div className="item circle" id="currentCol" style={{backgroundColor: currentCol}}>
+                        <input type="color" id="input_color" name="head" defaultValue={currentCol}
+                        onInput={colorSwitcher.bind(this)}/>
                     </div>
                     <div className="item">Current color</div>
-                    <div className="item circle" id="prevCol"></div>
-                    <div className="item">Prev Color</div>
-                    <div className="item circle" id="red"></div>
-                    <div className="item">red</div>
-                    <div className="item circle" id="blue"></div>
-                    <div className="item">blue</div>
+                    {colors.map((el, idx) => <Color
+                    key={idx}
+                    el={el}
+                    />)}
             </div>
         );
     }

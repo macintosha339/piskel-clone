@@ -1,34 +1,44 @@
 import React, { PureComponent } from "react";
-import bucket from '../../../../public/icons/icon-share-bucket.png';
-import choose from '../../../../public/icons/icon-upload.png';
-import colorPencil from '../../../../public/icons/pencil.png';
-import transform from '../../../../public/icons/icon-share.png';
+import Tool from "./tool/tool";
 
+const tools = [
+    {
+        id: 'bucket',
+        imgPath: '../../../../public/icons/icon-share-bucket.png',
+        text: 'Fill bucket',
+    },
+    {
+        id: 'chooseCol',
+        imgPath: '../../../../public/icons/icon-upload.png',
+        text: 'Choose color',
+    },
+    {
+        id: 'pencil',
+        imgPath: '../../../../public/icons/pencil.png',
+        text: 'Pencil',
+    },
+    {
+        id: 'transform',
+        imgPath: '../../../../public/icons/icon-share.png',
+        text: 'Transform',
+    },
+];
 class EditList extends PureComponent {
     constructor(props) {
         super(props);
     }
-
     render() {
+        const {activeTool, toolSwitcher} = this.props;
         return(
-            <div className="edit_list">
-                    <div className="item">
-                        <a href="#"><img src={bucket} alt="bucket" id="bucket"/></a>
-                    </div>
-                    <div className="item">Fill bucket</div>
-                    <div className="item">
-                        <a href="#"><img src={choose} alt="choose color" id="chooseCol"/></a>
-                    </div>
-                    <div className="item">Choose color</div>
-                    <div className="item">
-                        <a href="#"><img src={colorPencil} alt="pencil" id="pencil"/></a>
-                    </div>
-                    <div className="item">Pencil</div>
-                    <div className="item">
-                        <a href="#"><img src={transform} alt="transform"/></a>
-                    </div>
-                    <div className="item">Transform</div>
-                </div>
+        <div className="edit_list" >
+            {tools.map((el, idx) => <Tool
+            active={activeTool === el.id}
+            handleClick={toolSwitcher.bind(this, el.id)}
+            el={el}
+            key={idx}
+            />)
+            }
+        </div>
         );
     }
 }
