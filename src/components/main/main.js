@@ -17,6 +17,7 @@ class Main extends Component {
        inputRange: (+localStorage.getItem('inputRange') || 0),
        activeTool: (localStorage.getItem('activeTool') || 'pencil'),
        currenCol: '#2320c9',
+       prevCol: '#41F795'
     }
 
     toolSwitcher = (activeTool) => {
@@ -32,8 +33,23 @@ class Main extends Component {
             this.setState({ currenCol: e });
         } else {
             const currenCol = this.canvasComponent.current.hexToRGB(e.target.value);
-            this.setState({ currenCol });
+            this.swapCurrentWithPrevColors();
+            this.setState({ currenCol, prevCol });
         }
+    }
+    curColorChanger = (e, isRGB = false) => {
+        if (isRGB) {
+            this.setState({ currenCol: e });
+        } else {
+            const currenCol = window.getComputedStyle(e.target, null).getPropertyValue('background-color');
+            this.swapCurrentWithPrevColors();
+            this.setState({ currenCol, prevCol });
+        }
+    }
+    swapCurrentWithPrevColors = () => {
+        const prevElem = document.getElementById('prevCol')
+        const prevCol = this.state.currenCol
+        prevElem.style.backgroundColor = prevCol
     }
     render() {
         return(
@@ -46,6 +62,7 @@ class Main extends Component {
                 <ColorList
                 currenCol={this.state.currenCol}
                 colorSwitcher={this.colorSwitcher}
+                curColorChanger={this.curColorChanger}
                 />
             </div>
             <CanvasElement

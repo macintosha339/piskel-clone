@@ -21,7 +21,7 @@ class ColorList extends PureComponent {
     }
 
     render() {
-        const {currenCol, colorSwitcher} = this.props
+        const {currenCol, colorSwitcher, curColorChanger} = this.props
         return(
             <div className="color_list">
                     <div className="item circle" id="currentCol" style={{backgroundColor: currenCol}}>
@@ -32,6 +32,7 @@ class ColorList extends PureComponent {
                     {colors.map((el, idx) => <Color
                     key={idx}
                     el={el}
+                    curColorChanger = {curColorChanger}
                     />)}
             </div>
         );
