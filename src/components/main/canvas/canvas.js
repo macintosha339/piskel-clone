@@ -10,24 +10,21 @@ class CanvasElement extends PureComponent {
     
     lastX = null
     lastY = null
+    isDrawing = false
     
     draw = (e) => {
         const context = this.canvas.current.getContext('2d')
         const currentCol = document.getElementById('currentCol')
         const { pixelSize } = this.props
-        const cordX = e.offsetX === undefined ? Math.round(e.layerX / pixelSize)
-        : Math.round(e.offsetX / pixelSize)
-        const cordY = e.offsetY === undefined ? Math.round(e.layerY / pixelSize)
-        : Math.round(e.offsetY / pixelSize)
 
-        context.fillStyle = window.getComputedStyle(currentCol, null).getPropertyValue('background-color')
+        context.fillStyle = currentCol.style.backgroundColor
         if (!(e.buttons & 1)) {
             this.lastX = this.lastY = null
             return
         }
 
-        const x = e.offsetX
-        const y = e.offsetY
+        const x = e.nativeEvent.offsetX
+        const y = e.nativeEvent.offsetY
 
         if (this.lastX !== null) {
             this.getLineCoord({ x, y }, { x: this.lastX, y: this.lastY }).forEach(({ x, y }) => {

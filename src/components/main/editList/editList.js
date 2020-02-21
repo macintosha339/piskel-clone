@@ -1,25 +1,29 @@
 import React, { PureComponent } from "react";
 import Tool from "./tool/tool";
+import bucket from '../../../../public/icons/icon-share-bucket.png';
+import chooseCol from '../../../../public/icons/icon-upload.png';
+import pencil from '../../../../public/icons/pencil.png';
+import transform from '../../../../public/icons/icon-share.png';
 
 const tools = [
     {
         id: 'bucket',
-        imgPath: '../../../../public/icons/icon-share-bucket.png',
+        imgPath: bucket,
         text: 'Fill bucket',
     },
     {
         id: 'chooseCol',
-        imgPath: '../../../../public/icons/icon-upload.png',
+        imgPath: chooseCol,
         text: 'Choose color',
     },
     {
         id: 'pencil',
-        imgPath: '../../../../public/icons/pencil.png',
+        imgPath: pencil,
         text: 'Pencil',
     },
     {
         id: 'transform',
-        imgPath: '../../../../public/icons/icon-share.png',
+        imgPath: transform,
         text: 'Transform',
     },
 ];

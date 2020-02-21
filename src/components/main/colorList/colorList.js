@@ -21,11 +21,11 @@ class ColorList extends PureComponent {
     }
 
     render() {
-        const {currentCol, colorSwitcher} = this.props
+        const {currenCol, colorSwitcher} = this.props
         return(
             <div className="color_list">
-                    <div className="item circle" id="currentCol" style={{backgroundColor: currentCol}}>
-                        <input type="color" id="input_color" name="head" defaultValue={currentCol}
+                    <div className="item circle" id="currentCol" style={{backgroundColor: currenCol}}>
+                        <input type="color" id="input_color" name="head" defaultValue={currenCol}
                         onInput={colorSwitcher.bind(this)}/>
                     </div>
                     <div className="item">Current color</div>

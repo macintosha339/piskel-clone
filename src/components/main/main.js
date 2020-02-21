@@ -16,7 +16,7 @@ class Main extends Component {
        imageLoaded: (localStorage.getItem('imageLoaded') || false),
        inputRange: (+localStorage.getItem('inputRange') || 0),
        activeTool: (localStorage.getItem('activeTool') || 'pencil'),
-       currenCol: '#с4с4с4',
+       currenCol: '#2320c9',
     }
 
     toolSwitcher = (activeTool) => {
@@ -49,6 +49,7 @@ class Main extends Component {
                 />
             </div>
             <CanvasElement
+            ref={this.canvasComponent}
             activeTool ={this.state.activeTool}
             pixelSize={this.state.pixelSize}
             sizeSwitcher={this.sizeSwitcher}
