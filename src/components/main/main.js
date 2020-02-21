@@ -48,7 +48,7 @@ class Main extends Component {
     }
     swapCurrentWithPrevColors = () => {
         const prevElem = document.getElementById('prevCol')
-        const prevCol = this.state.currenCol
+        let prevCol = this.state.currenCol
         prevElem.style.backgroundColor = prevCol
     }
     render() {

@@ -79,6 +79,19 @@ class CanvasElement extends PureComponent {
         return `rgb(${r}, ${g}, ${b})`;
       }
 
+      getPixelColor = (e) => {
+        const x = e.nativeEvent.offsetX === undefined ? e.nativeEvent.layerX : e.nativeEvent.offsetX
+        const y = e.nativeEvent.offsetY === undefined ? e.nativeEvent.layerY : e.nativeEvent.offsetY
+        const context = this.canvas.current.getContext('2d')
+        const p = context.getImageData(x, y, 1, 1).data
+        prevCol.style.backgroundColor = window.getComputedStyle(currentCol, null).getPropertyValue('background-color')
+        currentCol.style.backgroundColor = `rgb(${p[0]}, ${p[1]}, ${p[2]})`
+      }
+
+      handleClick = (e) => {
+          if(this.props.activeTool === 'chooseCol') this.getPixelColor(e)
+      }
+
     render() {
 
         return(
@@ -90,6 +103,7 @@ class CanvasElement extends PureComponent {
                 </div>
                 <canvas id="canvas" ref = {this.canvas} width={512} height={512}
                 onMouseMove = {this.mouseMove}
+                onClick={this.handleClick}
                 ></canvas>
                 <input className="switch_size" type="range" defaultValue="0" min="0" max="2"/>
                 </div>
