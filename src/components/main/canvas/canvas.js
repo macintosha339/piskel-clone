@@ -88,8 +88,17 @@ class CanvasElement extends PureComponent {
         currentCol.style.backgroundColor = `rgb(${p[0]}, ${p[1]}, ${p[2]})`
       }
 
+      fill = () => {
+        console.log('hello')
+      let col = window.getComputedStyle(currentCol, null).getPropertyValue('background-color')
+      const context = this.canvas.current.getContext('2d')
+      context.fillStyle = col
+      context.fillRect(0, 0, 512, 512)
+      }
+
       handleClick = (e) => {
           if(this.props.activeTool === 'chooseCol') this.getPixelColor(e)
+          if(this.props.activeTool === 'bucket') this.fill()
       }
 
     render() {
