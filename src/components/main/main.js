@@ -11,7 +11,7 @@ class Main extends Component {
         this.canvasComponent = React.createRef();
     }
 
-    state = {
+    state  = {
        pixelSize : (+localStorage.getItem('pixelSize') || 4),
        imageLoaded: (localStorage.getItem('imageLoaded') || false),
        inputRange: (+localStorage.getItem('inputRange') || 0),
