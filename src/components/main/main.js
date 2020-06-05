@@ -17,7 +17,8 @@ class Main extends Component {
        inputRange: (+localStorage.getItem('inputRange') || 0),
        activeTool: (localStorage.getItem('activeTool') || 'pencil'),
        currenCol: '#2320c9',
-       prevCol: '#41F795'
+       prevCol: '#41F795',
+       imageStateLoaded: localStorage.getItem('imageStateLoaded') || false
     }
 
     toolSwitcher = (activeTool) => {
@@ -51,6 +52,9 @@ class Main extends Component {
         let prevCol = this.state.currenCol
         prevElem.style.backgroundColor = prevCol
     }
+    imageStateLoadedSwitcher = (imageStateLoaded) => {
+        this.setState( {imageStateLoaded} )
+    }
     render() {
         return(
         <main className="main">
@@ -72,6 +76,8 @@ class Main extends Component {
             sizeSwitcher={this.sizeSwitcher}
             inputRange={this.state.inputRange}
             currenCol={this.state.currenCol}
+            imageStateLoaded={this.state.imageStateLoaded}
+            imageStateLoadedSwitcher={this.imageStateLoadedSwitcher}
             />  
         </main>
         );

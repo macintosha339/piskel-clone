@@ -41,7 +41,7 @@ class CanvasElement extends PureComponent {
               context.drawImage(image, 0, 0, canvas.width, canvas.height);
             }
             localStorage.setItem('curImage', canvas.toDataURL())
-            let imageStateLoaded = true
+            this.imageStateLoaded = true
           localStorage.setItem('imageStateLoaded', imageStateLoaded)
           }
           
@@ -143,16 +143,33 @@ class CanvasElement extends PureComponent {
           if(this.props.activeTool === 'bucket') this.fill()
       }
       
+      grayscale = () => {
+        if (!imageStateLoaded) {
+          alert('Where your image???');
+          return;
+        }
+        const context = this.canvas.current.getContext('2d')
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const { data } = imageData;
+        for (let i = 0; i < data.length; i += 4) {
+          const item = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          data[i] = item;
+          data[i + 1] = item;
+          data[i + 2] = item;
+        }
+        context.putImageData(imageData, 0, 0);
+        localStorage.setItem('curImage' , canvas.toDataURL())
+      }
       
 
     render() {
-
+      const { imageStateLoaded } = this.props
         return(
             <div className="canvas_wrapper">
                 <div className="loader_tools">
                     <button className="loader-button btn_loader" id="load-image" onClick = {this.componentDidUpdate}>Load</button>
                     <input className="loader-input" type="text" placeholder="Enter city" id="search-input"/>
-                    <button className="black_and_white btn_loader">B&W</button>
+                    <button className="black_and_white btn_loader" onClick = {this.grayscale}>B&W</button>
                 </div>
                 <canvas id="canvas" ref = {this.canvas} width={512} height={512}
                 onMouseMove = {this.mouseMove}
